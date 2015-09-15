@@ -187,12 +187,6 @@ GzMatrix	rotateY =
 	fclose(infile);
 	delete cache;
 
-	//GzPopLight(m_pRender);
-	//GzPopLight(m_pRender);
-	//GzPopLight(m_pRender);
-
-
-
 	if (status) exit(GZ_FAILURE);
 }
 
@@ -213,10 +207,8 @@ int Application5::fastRender(bool writable)
 	nameListTriangle[2] = GZ_TEXTURE_INDEX;
 
 	FILE *outfile;
-	if (writable)
-	{
-		if (0 != fopen_s(&outfile, OUTFILE, "wb"))
-		{
+	if (writable) {
+		if (0 != fopen_s(&outfile, OUTFILE, "wb")) {
 			AfxMessageBox(_T("The output file was not opened\n"));
 			return GZ_FAILURE;
 		}
@@ -226,12 +218,10 @@ int Application5::fastRender(bool writable)
 	* Walk through the list of triangles, set color
 	* and render each triangle, read in tri word
 	*/
-	/*GzPopLight(m_pRender);
-	GzPopLight(m_pRender);
-	GzPopLight(m_pRender*/
-	GzLight	light1 ={ {-0.7071, 0.7071, 0}, {0.5, 0.5, 0.9} };// { {0.7071, 0.7071, -0.4}, {0.8, 0.8, 0.8} };//;
-	GzLight	light2 =  { { 0, -0.7071, -0.7071 }, { 0.9, 0.2, 0.3 } };//{ {0.7071, 0.7071, -0.4}, {0.8, 0.8, 0.8} };
-	GzLight	light3 ={ { 0.7071, 0.0, -0.7071 }, { 0.2, 0.7, 0.3 } };// { {0.7071, 0.7071, -0.4}, {0.8, 0.8, 0.8} };// 
+
+	GzLight	light1 ={ {-0.7071, 0.7071, 0}, {0.5, 0.5, 0.9} };
+    GzLight	light2 =  { { 0, -0.7071, -0.7071 }, { 0.9, 0.2, 0.3 } };
+    GzLight	light3 ={ { 0.7071, 0.0, -0.7071 }, { 0.2, 0.7, 0.3 } };
 	while (m_pRender->numlights >= 0) {
 		GzPopLight(m_pRender);
 	}
@@ -239,14 +229,12 @@ int Application5::fastRender(bool writable)
 	GzPushLight(m_pRender, light3);
 	GzPushLight(m_pRender, light2);
 	GzPushLight(m_pRender, light1);
-	for (unsigned int i = 0; i < mesh.size(); i++)
-	{
+	for (unsigned int i = 0; i < mesh.size(); i++) {
 		valueListTriangle[0] = (GzPointer)(mesh[i].Vertex);
 		valueListTriangle[1] = (GzPointer)(mesh[i].Normal);
 		valueListTriangle[2] = (GzPointer)(mesh[i].Texture);
-
 		/*
-		* Set the value point//ers to the first vertex of the
+		* Set the value pointers to the first vertex of the
 		* triangle, then feed it to the renderer
 		* NOTE: this sequence matches the nameList token sequence
 		*/
@@ -256,21 +244,15 @@ int Application5::fastRender(bool writable)
 	GzNewDisplay(&tempDisplay, 1, 256, 256);// = *m_pDisplay;
 	EdgeDec(outfile, m_pFrameBuffer, m_pDisplay, tempDisplay);
 
-	if (writable)
-	{
+	if (writable) {
 		GzFlushDisplay2File(outfile, m_pDisplay);
 		fclose(outfile);
 	}
-	
-	
 	status = 0;
-
 	status |= GzInitDisplay(m_pDisplay);
-
 	nameListTriangle[0] = GZ_POSITION;
 	nameListTriangle[1] = GZ_NORMAL;
 	nameListTriangle[2] = GZ_TEXTURE_INDEX;
-	
 	
 	while (m_pRender->numlights >= 0) {
 		GzPopLight(m_pRender);
@@ -283,13 +265,7 @@ int Application5::fastRender(bool writable)
 		valueListTriangle[2] = (GzPointer)(mesh[i].Texture);
 		GzPutTriangle(m_pRender, 3, nameListTriangle, valueListTriangle);
 	}
-	
-	//EdgeDec(outfile, m_pFrameBuffer, m_pDisplay);
-	//GzFlushDeepmap2FrameBuffer(m_pFrameBuffer, m_pDisplay);
 	GzFlushDisplay2FrameBuffer(m_pFrameBuffer, m_pDisplay, tempDisplay);
-
-	
-
 	return status;
 }
 
