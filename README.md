@@ -1,0 +1,4 @@
+# NPR-Comic-Book-and-Sketchy-Effect
+
+Non Photorealistic rendering(NPR) can help us use computers to produce images that look like hand drawings. Generally, computer graphics primarily focuses on producing images which are as precise as photographs. However, photographs are not always good for visual effect. Sometimes we need some a​rtistic styles for animated cartoons, painting, video games and so on.
+The purpose of this project was to show the results that one can expect from NPR. The procedure involved was the implementation of some Toon Shading styles by doing calculations regarding the edges, lighting and principal curvature. The results we got were various images of three different forms of Toon Shading which highlighted the implementation of our project. In conclusion we were able to make 3D images of various objects that were non photorealistic in nature.
